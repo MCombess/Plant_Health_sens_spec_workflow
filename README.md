@@ -9,8 +9,7 @@ Bayesian modelling is applied to this observation dataset using 'Plummer M. Just
 # (2) Processing simulation output_Feb25.R
 Script to process the output from the modelling in (1) to provide model estimates of sensitivity and specificity values of individual simulated surveyors and compare with the actual sensitivity and specificity values
 of simulated surveyors for calculation of mean squared error values.
-Script also contains the code to combine the individual estimates of simulated surveyor sensitivity and specificity to provide estimates of the distribution of all surveyors' sensitivity and specicity, and compare against values
-from the simulated distributions.
+Script also contains the code to combine the individual estimates of simulated surveyor sensitivity and specificity to provide estimates of the distribution of all surveyors' sensitivity and specicity, and compare against the distributions surveyor sensitivity and specificity were simulated from.
 Script for plotting both these outputs is provided.
 
 # (3) Visualising output errors_Feb25.R
