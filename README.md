@@ -13,7 +13,7 @@ Script also contains the code to combine the individual estimates of simulated s
 Script for plotting both these outputs is provided.
 
 # (3) Visualising output errors_Feb25.R
-Script to visualise the model error estimates by model priors - reads file output_erros_feb25.csv
+Script to visualise the model error estimates by model priors - reads file output_errors_feb25.csv
 
 # (4) Feb25_AOD analyses code.R
 Script to analyse the sensitivity and specificity of real-world citizen science observation data for the sensitivity and specificity of detecting three acute oak decline symptoms (stem bleeds, agrilus beetle exit holes, bark cracking)
