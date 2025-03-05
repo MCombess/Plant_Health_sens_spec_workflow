@@ -24,4 +24,4 @@ Script to analyse the sensitivity and specificity of real-world trained citizen 
 using expert data as a 'gold-standard' dataset. Uses files 'Citizen scientist observations.csv' and 'Expert Observations.csv'
 
 # (6) S2 File.xlsx
-Summary of citizen scientist surveyor sensitivity and specificity values from (6)
+Summary of citizen scientist surveyor sensitivity and specificity values from (5)
