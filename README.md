@@ -13,9 +13,15 @@ of simulated surveyors.
 Script also contains the code to combine the individual model estimates of simulated surveyor sensitivity and specificity values to provide estimates of the distribution of all surveyors' sensitivity and specicity. This model estimate is compared against the distributions that surveyor sensitivity and specificity were simulated from.
 Script for plotting both these outputs is provided.
 
-# (3) Visualising output errors_Feb25.R
+# (3) S3 File.xlsx 
+Output statistics from model runs from (1) prsented in the paper (individuals and distributions) with mean squared error values, and details of the prior probability distributions.
+
+# (4) Visualising output errors_Feb25.R
 Script to visualise the model error estimates by model priors - reads file output_errors_feb25.csv
 
-# (4) Feb25_AOD analyses code.R
+# (5) Feb25_AOD analyses code.R
 Script to analyse the sensitivity and specificity of real-world trained citizen science observation data for the sensitivity and specificity of detecting three acute oak decline symptoms (stem bleeds, agrilus beetle exit holes, bark cracking)
 using expert data as a 'gold-standard' dataset. Uses files 'Citizen scientist observations.csv' and 'Expert Observations.csv'
+
+# (6) S2 File.xlsx
+Summary of citizen scientist surveyor sensitivity and specificity values from (6)
