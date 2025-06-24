@@ -28,6 +28,15 @@ actualsevol2 <- c()
 actualspvol1 <- c()
 actualspvol2 <- c()
 
+actualcovdp <- c()
+actualcovdn <- c()
+maxcovdp <- c()
+mincovdp <- c()
+maxcovdn <- c()
+mincovdn <- c()
+acsimsevolunteer1 <- c() #Add acsimsevolunteer2 <- c() if we want to look at this later in the script
+acsimspvolunteer1 <- c() #Add acsimspvolunteer2 <- c() if we want to look at this later in the script
+
 estsealpha1 <- c()
 estsealpha1u95 <- c()
 estsealpha1l95 <- c()
@@ -116,9 +125,9 @@ trialnew <- c()
 
 for(j in 1:25){   #Adjust number of surveyors assessed here (this run is for 25)
   
-site1symptom <- rbinom(80, 1, prob = 0.30) #We are selecting 80 trees a surveyor will sample from site 1 with a probability of 0.30 the tree will actually be diseased
+site1symptom <- rbinom(80, 1, prob = 0.30) #We are selecting 80 trees a surveyor will sample from site 1 with a probability of 0.30 the tree will actually be diseased.
   
-site2symptom <- rbinom(80, 1, prob = 0.60) #We are selecting 80 trees a surveyor will sample from site 1 with a probability of 0.30 the tree will actually be diseased
+site2symptom <- rbinom(80, 1, prob = 0.60) #We are selecting 80 trees a surveyor will sample from site 1 with a probability of 0.60 the tree will actually be diseased.
   
 #Label trees on each site#
 site1tree <- as.factor(seq(1,80))
@@ -141,7 +150,7 @@ bleedspec$lower <- bleedspec$BleedSpecificity-bleedspec$ci
 bleedspec$upper <- bleedspec$BleedSpecificity+bleedspec$ci
 
 #Provide some broad starting parameters to estimate beta distribution parameters for the distribution of specificity#
-startest <- epi.betabuster(median(bleedspec$BleedSpecificity), 0.95, TRUE, min(bleedspec$lower), 0.95)
+startest <- epi.betabuster(median(bleedspec$BleedSpecificity), 0.95, "greater than", min(bleedspec$lower), 0.95) #epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 #Now fit this to the specificity data to estimate the beta distribution parameters for the specificity of the observed AOD stem bleed data
 bleedsp <- bleedspec$BleedSpecificity
@@ -168,7 +177,7 @@ bleedsens$lower <- bleedsens$BleedSensitivity-bleedsens$ci
 bleedsens$upper <- bleedsens$BleedSensitivity+bleedsens$ci
 min(bleedsens$lower)
 
-startest <- epi.betabuster(median(bleedsens$BleedSensitivity), 0.95, TRUE, min(bleedsens$lower), 0.95)
+startest <- epi.betabuster(median(bleedsens$BleedSensitivity), 0.95, "greater than", min(bleedsens$lower), 0.95) #epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 bleedse <- bleedsens$BleedSensitivity
 trialse <- fitdist(bleedse,dist="beta",method="mle",start=startest[c(1,2)])
@@ -398,7 +407,7 @@ surveyvol2[((j*length(allvol2)+1)-length(allvol2)):(j*length(allvol2))] <- allvo
 #########################Setting Priors#########################
 
 ##################Poor prior information both symptoms' sensitivity and specificity###################
-spBetat1 <- epi.betabuster(median(bleedspec$BleedSpecificity)-0.2, 0.95, TRUE, 0.10, 0.95) #For specificity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#
+spBetat1 <- epi.betabuster(median(bleedspec$BleedSpecificity)-0.2, 0.95, "greater than", 0.10, 0.95) #For specificity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 
 alphaspt1 <- c(rep(spBetat1$shape1,time=1)) #Saving the specificity alpha parameter prior information for symptom 1#
@@ -413,7 +422,7 @@ betaspt2 <- c(rep(spBetat1$shape2, time=1)) #Saving the specificity beta paramet
 precspt2 <- c(rep(1/spBetat1$variance,time=1)) #Saving the specificity precision prior information for symptom 2#
 
 
-seBetat1 <- epi.betabuster(median(bleedsens$BleedSensitivity)-0.2, 0.95, TRUE, 0.10, 0.95) #For sensitivity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#
+seBetat1 <- epi.betabuster(median(bleedsens$BleedSensitivity)-0.2, 0.95, "greater than", 0.10, 0.95) #For sensitivity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 
 alphaset1 <- c(rep(seBetat1$shape1, time=1)) #Saving the sensitivity alpha parameter prior information for symptom 1#
@@ -431,7 +440,7 @@ precset2 <- c(rep(1/seBetat1$variance, time=1)) #Saving the sensitivity precisio
 
 ##################Use code below for poor prior information symptom one sensitivity and specificity, very good information symptom two sensitivity and specificity###################
 
-#spBetat1 <- epi.betabuster(median(bleedspec$BleedSpecificity)-0.2, 0.95, TRUE, 0.10, 0.95) #For specificity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#
+#spBetat1 <- epi.betabuster(median(bleedspec$BleedSpecificity)-0.2, 0.95, "greater than", 0.10, 0.95) #For specificity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 #alphaspt1 <- c(rep(spBetat1$shape1,time=1)) #Saving the specificity alpha parameter prior information for symptom 1#
 #betaspt1 <- c(rep(spBetat1$shape2, time=1)) #Saving the specificity beta parameter prior information for symptom 1#
@@ -449,7 +458,7 @@ precset2 <- c(rep(1/seBetat1$variance, time=1)) #Saving the sensitivity precisio
 #Next, calculate the precision prior parameter for specificity symptom 2
 #precspt2 <- c(rep(1/spvar2,time=1))
 
-#seBetat1 <- epi.betabuster(median(bleedsens$BleedSensitivity)-0.2, 0.95, TRUE, 0.10, 0.95) #For sensitivity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#
+#seBetat1 <- epi.betabuster(median(bleedsens$BleedSensitivity)-0.2, 0.95, "greater than", 0.10, 0.95) #For sensitivity: Provides alpha and beta parameters from beta distribution with 'poor' prior information#epi.betabuster function is generating beta distribution based on expert elicitation that the best estimate for this value is the first term in the function, and we are 95% sure the value is greater than the second to last term in the function
 
 
 #alphaset1 <- c(rep(seBetat1$shape1, time=1)) #Saving the sensitivity alpha parameter prior information for symptom 1#
@@ -567,10 +576,10 @@ s1allpcomb <- s1allpcomb %>% mutate(pcombaa=sum(pcombaa), pcombab=sum(pcombab),
 
 nhosts <- length(s1allpcomb$site1tree)
 
-s2allpcomb <- datasite2 %>% mutate(pcombaa=vol1==1&vol2==1,
-                                   pcombab=vol1==1&vol2==0,
-                                   pcombba=vol1==0&vol2==1,
-                                   pcombbb=vol1==0&vol2==0)
+s2allpcomb <- datasite2 %>% mutate(pcombaa=vol1b==1&vol2b==1,
+                                   pcombab=vol1b==1&vol2b==0,
+                                   pcombba=vol1b==0&vol2b==1,
+                                   pcombbb=vol1b==0&vol2b==0)
 
 s2allpcomb[,c(8:11)]<- as.integer(c(s2allpcomb$pcombaa,s2allpcomb$pcombab,
                                     s2allpcomb$pcombba,s2allpcomb$pcombbb))
