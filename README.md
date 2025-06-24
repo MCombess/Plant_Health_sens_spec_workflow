@@ -5,7 +5,7 @@ Code and data repository for paper 'Unlocking plant health survey data: an appro
 # (1) WorkflowSimulationStudyScript_feb25.R
 Script for simulating observation datasets of plant health inspectors surveying a given number of trees across two sites (with different true disease prevalence).
 Bayesian modelling is applied to this observation dataset using 'Plummer M. Just Another Gibbs Sampler (JAGS) Version 4.3.0. 2017.' to estimate the sensitivity and specificity
-of surevyors in the absence of a gold-standard dataset. Output files of model estimates and observation datasets are saved.
+of surevyors in the absence of a gold-standard dataset. Output files of model estimates and observation datasets are saved. Uses input file 'AODprocesseddata.csv'.
 
 # (2) Processing simulation output_Feb25.R
 Script to process the output from the modelling in (1) to provide model estimates of sensitivity and specificity values of individual simulated surveyors and compare with the actual sensitivity and specificity values
