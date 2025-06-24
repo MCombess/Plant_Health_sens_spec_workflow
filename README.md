@@ -14,7 +14,8 @@ Script also contains the code to combine the individual model estimates of simul
 Script for plotting both these outputs is provided.
 
 # (3) S3 File.xlsx 
-Output statistics from model runs from (1) prsented in the paper (individuals and distributions) with mean squared error values, and details of the prior probability distributions.
+Output statistics from model runs from (1) prsented in the paper (individuals and distributions) with mean squared error values, and details of the prior probability distributions. This now contains data on the runs presented in the final manuscript with misspecified
+ture disease prevalence prior estimates.
 
 # (4) Visualising output errors_Feb25.R
 Script to visualise the model error estimates by model priors - reads file output_errors_feb25.csv
